@@ -13,7 +13,7 @@ Hey there! 👋 Welcome to my GitHub repository, where I share my web developmen
 
 1. **Clone the repository** to your local machine:  
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone  https://github.com/ImadA7/Web-Dev.git
 2. Navigate to the project folder you want to explore.
 3. Open index.html in your browser to check out the project in action!
 
