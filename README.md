@@ -23,4 +23,9 @@ Hey, I'm **Muhammad Imad**! 🚀 I'm a passionate **Web Developer** who loves tu
 
 This repository is a **reflection of my growth**, where I document my learning process and showcase the projects I build along the way. Excited to keep improving and sharing more cool stuff! 💡  
 
- 
+## 🔗 Connect with Me  
+
+💼 **LinkedIn:** [Muhammad Imad's LinkedIn](https://github.com/ImadA7)  
+🐙 **GitHub:** [Muhammad Imad's GitHub](https://www.linkedin.com/in/muhammad-imad-60368a312?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)  
+
+🚀 Feel free to **connect, collaborate, and share ideas!** Let's grow together.  
