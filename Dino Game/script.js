@@ -116,63 +116,51 @@ window.onload = function () {
     }
 };
 
-let dino = document.querySelector(".dino");  //from chatgpt
-let isJumping = false;
-let moveDistance = 20; // Adjust movement distance for mobile
-let screenWidth = window.innerWidth;
+//chatgpt
 
-// Listen for touch events
+let lastTap = 0; // Stores last tap time
+
 document.addEventListener("touchstart", function (event) {
-    let touchX = event.touches[0].clientX;
-    let touchY = event.touches[0].clientY;
+    let currentTime = new Date().getTime();
+    let tapLength = currentTime - lastTap;
     
-    // Define screen areas for movement
-    let screenMiddle = screenWidth / 2;
-    let screenHeight = window.innerHeight;
-    
-    if (touchY > screenHeight / 2) {
-        // If tapped in lower half → Jump
+    if (tapLength < 300 && tapLength > 0) { // If tapped twice quickly
         jump();
     } else {
-        // If tapped left side → Move Left
-        if (touchX < screenMiddle) {
-            moveLeft();
-        }
-        // If tapped right side → Move Right
-        else {
-            moveRight();
+        let touchX = event.touches[0].clientX;
+        let screenWidth = window.innerWidth;
+
+        if (touchX < screenWidth / 2) {
+            moveLeft();  // Move left if tapped on left side
+        } else {
+            moveRight(); // Move right if tapped on right side
         }
     }
+
+    lastTap = currentTime; // Update last tap time
 });
 
-// Jump function
 function jump() {
-    if (!isJumping) {
-        isJumping = true;
+    let dino = document.querySelector(".dino");
+    if (!dino.classList.contains("jumping")) {
         dino.classList.add("jumping");
         setTimeout(() => {
             dino.classList.remove("jumping");
-            isJumping = false;
-        }, 700); // Adjust jump time
+        }, 700); // Jump duration
     }
 }
 
-// Move Left
 function moveLeft() {
+    let dino = document.querySelector(".dino");
     let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
-    if (currentLeft > 0) { // Prevent moving out of bounds
-        dino.style.left = (currentLeft - moveDistance) + "px";
-    }
+    dino.style.left = Math.max(0, currentLeft - 20) + "px"; // Move left, prevent going off screen
 }
 
-// Move Right
 function moveRight() {
+    let dino = document.querySelector(".dino");
     let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
-    if (currentLeft < screenWidth - dino.clientWidth) { // Prevent moving out of bounds
-        dino.style.left = (currentLeft + moveDistance) + "px";
-    }
+    let screenWidth = window.innerWidth;
+    let dinoWidth = dino.offsetWidth;
+    
+    dino.style.left = Math.min(screenWidth - dinoWidth, currentLeft + 20) + "px"; // Move right
 }
-
-
-
-
