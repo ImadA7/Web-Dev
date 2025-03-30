@@ -136,7 +136,7 @@ nav ul{
 }
 
 .line {
-    background-color: #217b7e; /* Keep only one background color */
+    background-color: #217b7e;  
     height: 3px;
     width: 0;
     position: absolute;
@@ -155,24 +155,24 @@ nav ul{
         text-align: center;
     }
     .gameInfo h1 {
-        font-size: 1rem; /* Make heading slightly smaller */
+        font-size: 1rem; 
     }
     .container {
-        width: 80vw; /* Increase game board size */
+        width: 80vw; 
         height: 80vw;
         display: grid;
-        grid-template-rows: repeat(3, 26vw); /* Adjust cell sizes */
+        grid-template-rows: repeat(3, 26vw);  
         grid-template-columns: repeat(3, 26vw);
         position: relative;
     }
     .box {
-        font-size: 1.5rem; /* Reduce X and O size slightly */
+        font-size: 1.5rem;  
     }
     .line {
         position: absolute;
         height: 4px;
         background-color: black;
-        display: none; /* Hide initially */
+        display: none; 
         transition: all 0.5s ease-in-out;
         transform-origin: left center;
     }
