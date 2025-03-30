@@ -92,27 +92,25 @@ function drawWinningLine(startX, startY, endX, endY) {
     let line = document.querySelector(".line");
     let container = document.querySelector(".container");
 
-    // Get grid size dynamically
+     
     let gridSize = container.clientWidth / 3;
 
-    // Calculate starting and ending positions
+   
     let startXPercent = (startX * gridSize) + (gridSize / 2);
     let startYPercent = (startY * gridSize) + (gridSize / 2);
     let endXPercent = (endX * gridSize) + (gridSize / 2);
     let endYPercent = (endY * gridSize) + (gridSize / 2);
 
-    // Adjust the winning line style
+ 
     let lineWidth = Math.sqrt(Math.pow(endXPercent - startXPercent, 2) + Math.pow(endYPercent - startYPercent, 2));
 
     line.style.width = `${lineWidth}px`;
     line.style.top = `${startYPercent}px`;
     line.style.left = `${startXPercent}px`;
-
-    // Calculate rotation angle
+ 
     let angle = Math.atan2(endYPercent - startYPercent, endXPercent - startXPercent) * (180 / Math.PI);
     line.style.transform = `rotate(${angle}deg)`;
-
-    // Show the line only after a win
+ 
     line.style.display = "block";
 }
  
