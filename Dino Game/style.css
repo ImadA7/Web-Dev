@@ -213,6 +213,6 @@ body{
 
 @keyframes jump {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-100px); } /* Adjust height */
+    50% { transform: translateY(200px); } /* Adjust height */
     100% { transform: translateY(0); }
 }
