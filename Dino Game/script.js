@@ -40,7 +40,7 @@ setInterval(() => {
 
     offsetX = Math.abs(dx - ox);
     offsetY = Math.abs(dy - oy);
-    // console.log(offsetX, offsetY)
+     
     if (offsetX < 73 && offsetY < 52) {
         gameOver.innerHTML = "𝔊𝔞𝔪𝔢 𝔒𝔳𝔢𝔯 - ℜ𝔢𝔩𝔬𝔞𝔡 𝔱𝔬 𝔓𝔩𝔞𝔶 𝔄𝔤𝔞𝔦𝔫"
         obstacle.classList.remove('obstacleAni')
@@ -77,7 +77,7 @@ document.addEventListener("keydown", function (event) {
     let playerPos = player.getBoundingClientRect();
     let gameContainer = document.querySelector(".gameContainer").getBoundingClientRect();
 
-    let moveDistance = window.innerWidth < 768 ? 0.5 : 6; // 0.5px for mobile, 6px for laptop
+    let moveDistance = window.innerWidth < 768 ? 0.5 : 6;  
 
     let currentLeft = parseFloat(window.getComputedStyle(player).left) || 0;
 
@@ -88,7 +88,7 @@ document.addEventListener("keydown", function (event) {
         player.style.left = (currentLeft - moveDistance) + "px";
     }
 
-    event.preventDefault(); // Prevents unwanted scrolling on mobile
+    event.preventDefault();  
 });
 
 function checkCollision() {
@@ -96,7 +96,7 @@ function checkCollision() {
     let obstacle = document.querySelector(".obstacle").getBoundingClientRect();
 
     if (
-        player.right - 5 > obstacle.left &&  // Slight buffer to avoid false collisions
+        player.right - 5 > obstacle.left &&  
         player.left + 5 < obstacle.right &&
         player.bottom > obstacle.top &&
         player.top < obstacle.bottom
@@ -106,38 +106,38 @@ function checkCollision() {
     }
 }
 
-// Adjust obstacle speed only on mobile
+ 
 window.onload = function () {
     if (window.innerWidth < 768) {
         let obstacle = document.querySelector(".obstacle");
         if (obstacle) {
-            obstacle.style.animationDuration = "4s"; // Slower speed only for phones
+            obstacle.style.animationDuration = "4s";  
         }
     }
 };
 
-//chatgpt
+ 
 
-let lastTap = 0; // Stores last tap time
+let lastTap = 0;  
 
 document.addEventListener("touchstart", function (event) {
     let currentTime = new Date().getTime();
     let tapLength = currentTime - lastTap;
     
-    if (tapLength < 300 && tapLength > 0) { // If tapped twice quickly
+    if (tapLength < 300 && tapLength > 0) {  
         jump();
     } else {
         let touchX = event.touches[0].clientX;
         let screenWidth = window.innerWidth;
 
         if (touchX < screenWidth / 2) {
-            moveLeft();  // Move left if tapped on left side
+            moveLeft();   
         } else {
-            moveRight(); // Move right if tapped on right side
+            moveRight();  
         }
     }
 
-    lastTap = currentTime; // Update last tap time
+    lastTap = currentTime; 
 });
 
 function jump() {
@@ -146,14 +146,14 @@ function jump() {
         dino.classList.add("jumping");
         setTimeout(() => {
             dino.classList.remove("jumping");
-        }, 700); // Jump duration
+        }, 700);  
     }
 }
 
 function moveLeft() {
     let dino = document.querySelector(".dino");
     let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
-    dino.style.left = Math.max(0, currentLeft - 20) + "px"; // Move left, prevent going off screen
+    dino.style.left = Math.max(0, currentLeft - 20) + "px";  
 }
 
 function moveRight() {
@@ -162,5 +162,5 @@ function moveRight() {
     let screenWidth = window.innerWidth;
     let dinoWidth = dino.offsetWidth;
     
-    dino.style.left = Math.min(screenWidth - dinoWidth, currentLeft + 20) + "px"; // Move right
+    dino.style.left = Math.min(screenWidth - dinoWidth, currentLeft + 20) + "px"; 
 }
