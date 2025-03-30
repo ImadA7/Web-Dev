@@ -203,3 +203,16 @@ body{
         background-repeat: no-repeat;
     }
 }
+
+
+//chatgpt
+
+.jumping {
+    animation: jump 0.7s ease-out;
+}
+
+@keyframes jump {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-100px); } /* Adjust height */
+    100% { transform: translateY(0); }
+}
