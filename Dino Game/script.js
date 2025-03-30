@@ -116,49 +116,60 @@ window.onload = function () {
     }
 };
 
-document.addEventListener("touchstart", (e) => {
-    let touchX = e.touches[0].clientX; // Get X position of touch
-    let screenWidth = window.innerWidth; 
+let dino = document.querySelector(".dino");  //from chatgpt
+let isJumping = false;
+let moveDistance = 20; // Adjust movement distance for mobile
+let screenWidth = window.innerWidth;
 
-    if (touchX < screenWidth / 3) {
-        moveLeft(); // Move Left when touching the left third of the screen
-    } else if (touchX > (2 * screenWidth) / 3) {
-        moveRight(); // Move Right when touching the right third of the screen
+// Listen for touch events
+document.addEventListener("touchstart", function (event) {
+    let touchX = event.touches[0].clientX;
+    let touchY = event.touches[0].clientY;
+    
+    // Define screen areas for movement
+    let screenMiddle = screenWidth / 2;
+    let screenHeight = window.innerHeight;
+    
+    if (touchY > screenHeight / 2) {
+        // If tapped in lower half → Jump
+        jump();
     } else {
-        jump(); // Jump when touching the center
+        // If tapped left side → Move Left
+        if (touchX < screenMiddle) {
+            moveLeft();
+        }
+        // If tapped right side → Move Right
+        else {
+            moveRight();
+        }
     }
 });
 
-// Optional: Prevent scrolling when touching the game
-document.addEventListener("touchmove", (e) => {
-    e.preventDefault();
-}, { passive: false });
-
-function moveLeft() {
-    let dino = document.querySelector(".dino");
-    let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
-    if (currentLeft > 10) { // Prevent moving out of bounds
-        dino.style.left = (currentLeft - 20) + "px"; // Adjust movement speed here
-    }
-}
-
-function moveRight() {
-    let dino = document.querySelector(".dino");
-    let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
-    let gameWidth = document.querySelector(".gameContainer").clientWidth;
-    
-    if (currentLeft < gameWidth - 60) { // Prevent moving out of bounds
-        dino.style.left = (currentLeft + 20) + "px"; // Adjust movement speed here
-    }
-}
-
+// Jump function
 function jump() {
-    let dino = document.querySelector(".dino");
-    if (!dino.classList.contains("jump")) {
-        dino.classList.add("jump");
+    if (!isJumping) {
+        isJumping = true;
+        dino.classList.add("jumping");
         setTimeout(() => {
-            dino.classList.remove("jump");
-        }, 700); // Adjust jump duration if needed
+            dino.classList.remove("jumping");
+            isJumping = false;
+        }, 700); // Adjust jump time
+    }
+}
+
+// Move Left
+function moveLeft() {
+    let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
+    if (currentLeft > 0) { // Prevent moving out of bounds
+        dino.style.left = (currentLeft - moveDistance) + "px";
+    }
+}
+
+// Move Right
+function moveRight() {
+    let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
+    if (currentLeft < screenWidth - dino.clientWidth) { // Prevent moving out of bounds
+        dino.style.left = (currentLeft + moveDistance) + "px";
     }
 }
 
