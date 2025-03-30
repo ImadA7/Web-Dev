@@ -116,3 +116,52 @@ window.onload = function () {
     }
 };
 
+document.addEventListener("touchstart", (e) => {
+    let touchX = e.touches[0].clientX; // Get X position of touch
+    let screenWidth = window.innerWidth; 
+
+    if (touchX < screenWidth / 3) {
+        moveLeft(); // Move Left when touching the left third of the screen
+    } else if (touchX > (2 * screenWidth) / 3) {
+        moveRight(); // Move Right when touching the right third of the screen
+    } else {
+        jump(); // Jump when touching the center
+    }
+});
+
+// Optional: Prevent scrolling when touching the game
+document.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+}, { passive: false });
+
+function moveLeft() {
+    let dino = document.querySelector(".dino");
+    let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
+    if (currentLeft > 10) { // Prevent moving out of bounds
+        dino.style.left = (currentLeft - 20) + "px"; // Adjust movement speed here
+    }
+}
+
+function moveRight() {
+    let dino = document.querySelector(".dino");
+    let currentLeft = parseInt(window.getComputedStyle(dino).left) || 0;
+    let gameWidth = document.querySelector(".gameContainer").clientWidth;
+    
+    if (currentLeft < gameWidth - 60) { // Prevent moving out of bounds
+        dino.style.left = (currentLeft + 20) + "px"; // Adjust movement speed here
+    }
+}
+
+function jump() {
+    let dino = document.querySelector(".dino");
+    if (!dino.classList.contains("jump")) {
+        dino.classList.add("jump");
+        setTimeout(() => {
+            dino.classList.remove("jump");
+        }, 700); // Adjust jump duration if needed
+    }
+}
+
+
+
+
